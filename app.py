@@ -1,12 +1,14 @@
 from flask import Flask, jsonify, request
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_cors import CORS  # Importe o CORS
 import sqlite3
 
-
 app = Flask(__name__)
-app.config['JWT_SECRET_KEY'] = 'rainalinda'  
+app.config['JWT_SECRET_KEY'] = 'your_jwt_secret_key'
+CORS(app)  # Adicione CORS ao seu app Flask
 jwt = JWTManager(app)
+
 
 def conn_db():
     return sqlite3.connect('zoonation.db')
